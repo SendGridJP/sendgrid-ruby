@@ -4,7 +4,7 @@ require "net/https"
 require "rest-client"
 
 module SendgridRuby
-  class SendgridRuby
+  class Sendgrid
 
     attr_accessor :debug_output
 
