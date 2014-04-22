@@ -282,8 +282,8 @@ module SendgridRuby
         'headers'     => get_headers_json,
       }
 
-      web['cc']         = get_ccs     if get_ccs
-      web['bcc']        = get_bccs    if get_bccs
+      # web['cc']         = get_ccs     if get_ccs
+      # web['bcc']        = get_bccs    if get_bccs
       web['fromname']   = @from_name  if @from_name
       web['replyto']    = @reply_to   if @reply_to
       web['to']         = @from       if (@smtpapi.to && @smtpapi.to.length > 0)

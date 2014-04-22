@@ -68,92 +68,92 @@ class EmailTest < Test::Unit::TestCase
     assert_equal("swift@sendgrid.com", email.get_reply_to)
   end
 
-  def test_set_cc
-    email = SendgridRuby::Email.new
+  # def test_set_cc
+  #   email = SendgridRuby::Email.new
 
-    email.set_cc('p1@mailinator.com')
-    email.set_cc('p2@mailinator.com')
+  #   email.set_cc('p1@mailinator.com')
+  #   email.set_cc('p2@mailinator.com')
 
-    assert_equal(1, email.get_ccs.length)
-    cc_list = email.get_ccs
-    assert_equal('p2@mailinator.com', cc_list[0])
-  end
+  #   assert_equal(1, email.get_ccs.length)
+  #   cc_list = email.get_ccs
+  #   assert_equal('p2@mailinator.com', cc_list[0])
+  # end
 
-  def test_set_ccs
-    email = SendgridRuby::Email.new
+  # def test_set_ccs
+  #   email = SendgridRuby::Email.new
 
-    email.set_ccs(['raz@mailinator.com', 'ber@mailinator.com'])
+  #   email.set_ccs(['raz@mailinator.com', 'ber@mailinator.com'])
 
-    assert_equal(2, email.get_ccs.length)
+  #   assert_equal(2, email.get_ccs.length)
 
-    cc_list = email.get_ccs
+  #   cc_list = email.get_ccs
 
-    assert_equal('raz@mailinator.com', cc_list[0])
-    assert_equal('ber@mailinator.com', cc_list[1])
-  end
+  #   assert_equal('raz@mailinator.com', cc_list[0])
+  #   assert_equal('ber@mailinator.com', cc_list[1])
+  # end
 
-  def test_add_cc
-    email = SendgridRuby::Email.new
+  # def test_add_cc
+  #   email = SendgridRuby::Email.new
 
-    email.add_cc('foo')
-    email.add_cc('raz')
+  #   email.add_cc('foo')
+  #   email.add_cc('raz')
 
-    assert_equal(2, email.get_ccs.length)
+  #   assert_equal(2, email.get_ccs.length)
 
-    cc_list = email.get_ccs
+  #   cc_list = email.get_ccs
 
-    assert_equal('foo', cc_list[0])
-    assert_equal('raz', cc_list[1])
+  #   assert_equal('foo', cc_list[0])
+  #   assert_equal('raz', cc_list[1])
 
-    # removeTo removes all occurences of data
-    email.remove_cc('raz')
+  #   # removeTo removes all occurences of data
+  #   email.remove_cc('raz')
 
-    assert_equal(1, email.get_ccs.length)
+  #   assert_equal(1, email.get_ccs.length)
 
-    cc_list = email.get_ccs
+  #   cc_list = email.get_ccs
 
-    assert_equal('foo', cc_list[0])
-  end
+  #   assert_equal('foo', cc_list[0])
+  # end
 
-  def test_set_bcc
-    email = SendgridRuby::Email.new
+  # def test_set_bcc
+  #   email = SendgridRuby::Email.new
 
-    email.set_bcc('bar')
-    email.set_bcc('foo')
-    assert_equal(1, email.get_bccs.length)
+  #   email.set_bcc('bar')
+  #   email.set_bcc('foo')
+  #   assert_equal(1, email.get_bccs.length)
 
-    bcc_list = email.get_bccs
-    assert_equal('foo', bcc_list[0])
-  end
+  #   bcc_list = email.get_bccs
+  #   assert_equal('foo', bcc_list[0])
+  # end
 
-  def test_set_bccs
-    email = SendgridRuby::Email.new
+  # def test_set_bccs
+  #   email = SendgridRuby::Email.new
 
-    email.set_bccs(['raz', 'ber'])
-    assert_equal(2, email.get_bccs.length)
+  #   email.set_bccs(['raz', 'ber'])
+  #   assert_equal(2, email.get_bccs.length)
 
-    bcc_list = email.get_bccs
-    assert_equal('raz', bcc_list[0])
-    assert_equal('ber', bcc_list[1])
-  end
+  #   bcc_list = email.get_bccs
+  #   assert_equal('raz', bcc_list[0])
+  #   assert_equal('ber', bcc_list[1])
+  # end
 
-  def test_add_bcc
-    email = SendgridRuby::Email.new
+  # def test_add_bcc
+  #   email = SendgridRuby::Email.new
 
-    email.add_bcc('foo')
-    email.add_bcc('raz')
-    assert_equal(2, email.get_bccs.length)
+  #   email.add_bcc('foo')
+  #   email.add_bcc('raz')
+  #   assert_equal(2, email.get_bccs.length)
 
-    bcc_list = email.get_bccs
-    assert_equal('foo', bcc_list[0])
-    assert_equal('raz', bcc_list[1])
+  #   bcc_list = email.get_bccs
+  #   assert_equal('foo', bcc_list[0])
+  #   assert_equal('raz', bcc_list[1])
 
-    email.remove_bcc('raz')
+  #   email.remove_bcc('raz')
 
-    assert_equal(1, email.get_bccs.length)
-    bcc_list = email.get_bccs
-    assert_equal('foo', bcc_list[0])
-  end
+  #   assert_equal(1, email.get_bccs.length)
+  #   bcc_list = email.get_bccs
+  #   assert_equal('foo', bcc_list[0])
+  # end
 
   def test_set_subject
     email = SendgridRuby::Email.new
@@ -395,8 +395,8 @@ class EmailTest < Test::Unit::TestCase
     assert_equal(nil, json['text'])
     assert_equal(nil, json['html'])
     assert_equal("{}", json['headers'])
-    assert_equal([], json['cc'])
-    assert_equal([], json['bcc'])
+    # assert_equal([], json['cc'])
+    # assert_equal([], json['bcc'])
     assert_equal(nil, json['fromname'])
     assert_equal(nil, json['replyto'])
   end
@@ -436,17 +436,17 @@ class EmailTest < Test::Unit::TestCase
     assert_equal('replyto@site.com', json['replyto'])
   end
 
-  def test_to_web_format_with_to_cc_and_bcc
-    email = SendgridRuby::Email.new
-    email.add_to('p1@mailinator.com')
-    email.add_bcc('p2@mailinator.com')
-    email.add_cc('p3@mailinator.com')
-    json     = email.to_web_format
+  # def test_to_web_format_with_to_cc_and_bcc
+  #   email = SendgridRuby::Email.new
+  #   email.add_to('p1@mailinator.com')
+  #   email.add_bcc('p2@mailinator.com')
+  #   email.add_cc('p3@mailinator.com')
+  #   json     = email.to_web_format
 
-    assert_equal(['p2@mailinator.com'], json['bcc'])
-    assert_equal(['p3@mailinator.com'], json['cc'])
-    assert_equal('{"to":["p1@mailinator.com"]}', json["x-smtpapi"])
-  end
+  #   assert_equal(['p2@mailinator.com'], json['bcc'])
+  #   assert_equal(['p3@mailinator.com'], json['cc'])
+  #   assert_equal('{"to":["p1@mailinator.com"]}', json["x-smtpapi"])
+  # end
 
   def test_to_web_format_with_attachment
     email = SendgridRuby::Email.new
