@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 require "test/unit"
 require "./lib/sendgrid_ruby"
+require "./lib/sendgrid_ruby/version"
 require "./lib/sendgrid_ruby/email"
 
 class SendgridRubyTest < Test::Unit::TestCase
