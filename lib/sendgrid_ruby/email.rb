@@ -66,53 +66,53 @@ module SendgridRuby
       @from_name
     end
 
-    def set_cc(email)
-      @cc_list = [email]
-      self
-    end
+    # def set_cc(email)
+    #   @cc_list = [email]
+    #   self
+    # end
 
-    def set_ccs(email_list)
-      @cc_list = email_list
-      self
-    end
+    # def set_ccs(email_list)
+    #   @cc_list = email_list
+    #   self
+    # end
 
-    def add_cc(email)
-      @cc_list.push(email)
-      self
-    end
+    # def add_cc(email)
+    #   @cc_list.push(email)
+    #   self
+    # end
 
-    def remove_cc(email)
-      @cc_list = remove_from_list(@cc_list, email)
-      self
-    end
+    # def remove_cc(email)
+    #   @cc_list = remove_from_list(@cc_list, email)
+    #   self
+    # end
 
-    def get_ccs
-      @cc_list
-    end
+    # def get_ccs
+    #   @cc_list
+    # end
 
-    def set_bcc(email)
-      @bcc_list = [email]
-      self
-    end
+    # def set_bcc(email)
+    #   @bcc_list = [email]
+    #   self
+    # end
 
-    def set_bccs(email_list)
-      @bcc_list = email_list
-      self
-    end
+    # def set_bccs(email_list)
+    #   @bcc_list = email_list
+    #   self
+    # end
 
-    def add_bcc(email)
-      @bcc_list.push(email)
-      self
-    end
+    # def add_bcc(email)
+    #   @bcc_list.push(email)
+    #   self
+    # end
 
-    def remove_bcc(email)
-      @bcc_list = remove_from_list(@bcc_list, email)
-      self
-    end
+    # def remove_bcc(email)
+    #   @bcc_list = remove_from_list(@bcc_list, email)
+    #   self
+    # end
 
-    def get_bccs
-      @bcc_list
-    end
+    # def get_bccs
+    #   @bcc_list
+    # end
 
     def set_subject(subject)
       @subject = subject
