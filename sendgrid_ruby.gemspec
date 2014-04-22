@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["awwa500@gmail.com"]
   spec.summary       = "Web API wrapper for SendGrid."
   spec.description   = "Web API wrapper for SendGrid."
-  spec.homepage      = "https://github.com/sendgridjp/sendgrid_ruby"
+  spec.homepage      = "https://github.com/sendgridjp/sendgrid-ruby"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
