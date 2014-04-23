@@ -14,32 +14,41 @@ class EmailTest < Test::Unit::TestCase
     email = SendgridRuby::Email.new
 
     email.add_to('p1@mailinator.com')
-    assert_equal(['p1@mailinator.com'], email.smtpapi.to)
+    assert_equal(['p1@mailinator.com'], email.get_tos)
 
     email.add_to('p2@mailinator.com')
-    assert_equal(['p1@mailinator.com', 'p2@mailinator.com'], email.smtpapi.to)
+    assert_equal(['p1@mailinator.com', 'p2@mailinator.com'], email.get_tos)
+  end
+
+  def test_remove_to
+    email = SendgridRuby::Email.new
+
+    email.add_to('p1@mailinator.com')
+    assert_equal(1, email.get_tos.length)
+    email.remove_to('p1@mailinator.com')
+    assert_equal(0, email.get_tos.length)
   end
 
   def test_add_to_with_name
     email = SendgridRuby::Email.new
 
     email.add_to('p1@mailinator.com', 'Person One')
-    assert_equal(['Person One <p1@mailinator.com>'], email.smtpapi.to)
+    assert_equal(['Person One <p1@mailinator.com>'], email.get_tos)
 
     email.add_to('p2@mailinator.com')
-    assert_equal(['Person One <p1@mailinator.com>', 'p2@mailinator.com'], email.smtpapi.to)
+    assert_equal(['Person One <p1@mailinator.com>', 'p2@mailinator.com'], email.get_tos)
   end
 
   def test_set_to
     email = SendgridRuby::Email.new
     email.set_tos(['p1@mailinator.com'])
-    assert_equal(['p1@mailinator.com'], email.smtpapi.to)
+    assert_equal(['p1@mailinator.com'], email.get_tos)
   end
 
   def test_set_tos
     email = SendgridRuby::Email.new
     email.set_tos(['p1@mailinator.com'])
-    assert_equal(['p1@mailinator.com'], email.smtpapi.to)
+    assert_equal(['p1@mailinator.com'], email.get_tos)
   end
 
   def test_set_from

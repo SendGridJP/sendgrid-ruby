@@ -35,6 +35,15 @@ module SendgridRuby
       self
     end
 
+    def get_tos
+      @smtpapi.to
+    end
+
+    def remove_to(email)
+      remove_from_list(@smtpapi.to, email)
+      self
+    end
+
     def set_from(email)
       @from = email
       self

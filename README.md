@@ -13,7 +13,7 @@ email.add_to('foo@bar.com')
 .set_text("Hello World!")
 .set_html("<strong>Hello World!</strong><br />")
 
-sendgrid = SendgridRuby::Sendgrid.new(sendgrid_username, sendgrid_password)
+sendgrid = SendgridRuby::Sendgrid.new('username', 'password')
 sendgrid.send(email)
 ```
 
@@ -88,8 +88,8 @@ Sometimes you might find yourself wanting to list the currently set Tos. You can
 
 ```Ruby
 mail   = SendgridRuby::Email.new
-mail->add_to('foo@bar.com')
-mail->get_tos
+mail.add_to('foo@bar.com')
+mail.get_tos
 ```
 
 ### remove_to 
@@ -219,8 +219,8 @@ mail.add_to('john@somewhere.com')
     .add_to("harry@somewhere.com")
     .add_to("Bob@somewhere.com")
     ...
-    .set_html("Hey %name%, we've seen that you've been gone for a while")
-    .add_substitution("%name%", array("John", "Harry", "Bob"))
+    .set_html("Hey name, we've seen that you've been gone for a while")
+    .add_substitution("name", ["John", "Harry", "Bob"])
 ```
 
 ### Sections ###
@@ -233,11 +233,11 @@ mail.add_to('john@somewhere.com')
     .add_to("harry@somewhere.com")
     .add_to("Bob@somewhere.com")
     ...
-    .set_html("Hey %name%, you work at %place%")
-    .add_substitution("%name%", array("John", "Harry", "Bob"))
-    .add_substitution("%place%", array("%office%", "%office%", "%home%"))
-    .add_section("%office%", "an office")
-    .add_section("%home%", "your house")
+    .set_html("Hey name, you work at place")
+    .add_substitution("name", ["John", "Harry", "Bob"])
+    .add_substitution("place", ["office", "office", "home"])
+    .add_section("office", "an office")
+    .add_section("home", "your house")
 ```
 
 ### Unique Arguments ###
@@ -246,7 +246,7 @@ Unique Arguments are used for tracking purposes
 
 ```Ruby
 mail   = SendgridRuby::Email.new
-mail>add_to('foo@bar.com')
+mail.add_to('foo@bar.com')
     ...
     .add_unique_arg("Customer", "Someone")
     .add_unique_arg("location", "Somewhere")
@@ -279,6 +279,22 @@ mail.add_to('foo@bar.com')
     .add_header('X-Transport', 'web')
 ```
 
+### Output debug log ###
+
+You can output the log for debug to $stderr
+
+```Ruby
+mail   = SendgridRuby::Email.new
+mail.add_to('foo@bar.com')
+    ...
+    .add_header('X-Sent-Using', 'SendGrid-API')
+    .add_header('X-Transport', 'web')
+
+sendgrid = SendgridRuby::Sendgrid.new(sendgrid_username, sendgrid_password)
+sendgrid.debug_output = true
+sendgrid.send(mail)
+```
+
 ### Sending to 1,000s of emails in one batch
 
 Sometimes you might want to send 1,000s of emails in one request. You can do that. It is recommended you break each batch up in 1,000 increements. So if you need to send to 5,000 emails, then you'd break this into a loop of 1,000 emails at a time.
@@ -293,9 +309,9 @@ names      = ["Alpha", "Beta", "Zeta"]
 email.set_from("from@mailinator.com")
     .set_subject('[sendgrid-ruby-batch-email]')
     .set_tos($recipients)
-    .add_substitution("%name%", $names)->
-    .set_text("Hey %name, we have an email for you")->
-    .set_html("<h1>Hey %name%, we have an email for you</h1>");
+    .add_substitution("name", $names)
+    .set_text("Hey name, we have an email for you")
+    .set_html("<h1>Hey name, we have an email for you</h1>")
 
 result = sendgrid.send(mail)
 ```
@@ -310,7 +326,7 @@ sendgrid  = SendgridRuby::Sendgrid.new(SENDGRID_USERNAME, SENDGRID_PASSWORD, opt
 
 mail    = SendgridRuby::Email.new
 ...
-result  = sendgrid.send(email);
+result  = sendgrid.send(email)
 ```
 
 ## Contributing
