@@ -1,6 +1,7 @@
 # sendgrid_ruby
 
-This gem allows you to quickly and easily send emails through SendGrid using Ruby.
+This gem allows you to quickly and easily send emails through SendGrid using Ruby.  
+See [Usage](https://github.com/SendGridJP/sendgridjp-ruby-example).  
 
 [![Build Status](https://travis-ci.org/SendGridJP/sendgrid-ruby.svg?branch=master)](https://travis-ci.org/SendGridJP/sendgrid-ruby)
 
