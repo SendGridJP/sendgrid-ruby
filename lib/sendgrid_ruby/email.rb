@@ -284,7 +284,7 @@ module SendgridRuby
       web = {
         'to'          => @to,
         'from'        => get_from,
-        'x-smtpapi'   => @smtpapi.json_string,
+        'x-smtpapi'   => @smtpapi.to_json,
         'subject'     => @subject,
         'text'        => @text,
         'html'        => @html,

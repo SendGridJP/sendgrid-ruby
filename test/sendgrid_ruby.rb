@@ -7,7 +7,7 @@ require "./lib/sendgrid_ruby/email"
 class SendgridRubyTest < Test::Unit::TestCase
 
   def test_version
-    assert_equal("0.0.1", SendgridRuby::VERSION)
+    assert_equal("0.0.2", SendgridRuby::VERSION)
   end
 
   def test_initialize
