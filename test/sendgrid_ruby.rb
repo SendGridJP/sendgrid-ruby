@@ -1,13 +1,22 @@
 # -*- encoding: utf-8 -*-
 require "test/unit"
+require "dotenv"
 require "./lib/sendgrid_ruby"
 require "./lib/sendgrid_ruby/version"
 require "./lib/sendgrid_ruby/email"
 
 class SendgridRubyTest < Test::Unit::TestCase
 
+  def setup
+    config = Dotenv.load
+    @username = ENV["SENDGRID_USERNAME"]
+    @password = ENV["SENDGRID_PASSWORD"]
+    @from = ENV["FROM"]
+    @tos = ENV["TOS"].split(',') if ENV["TOS"] != nil
+  end
+
   def test_version
-    assert_equal("0.0.2", SendgridRuby::VERSION)
+    assert_equal("0.0.3", SendgridRuby::VERSION)
   end
 
   def test_initialize
@@ -125,6 +134,23 @@ class SendgridRubyTest < Test::Unit::TestCase
       sendgrid.send(email)
     end
 
+  end
+
+  def test_send_if_avairable
+
+    if @from == nil || @tos == nil
+      return
+    end
+
+    email = SendgridRuby::Email.new
+    email.set_from(@from).
+      set_subject('test_send subject').
+      set_text('foobar text').
+      add_to(@tos[0])
+
+    sendgrid = SendgridRuby::Sendgrid.new(@username, @password)
+    sendgrid.debug_output = true
+    sendgrid.send(email)
   end
 
 end
