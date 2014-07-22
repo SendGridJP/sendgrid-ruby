@@ -22,7 +22,9 @@ module SendgridRuby
 
       RestClient.log = $stderr if @debug_output
 
-      response = RestClient.post 'https://api.sendgrid.com/api/mail.send.json', form, :content_type => :json
+      headers          = Hash.new
+      headers[:content_type] = :json
+      response = RestClient.post 'https://api.sendgrid.com/api/mail.send.json', form, :content_type => :json, "User-Agent" => "sendgrid/#{SendgridRuby::VERSION};ruby"
 
       JSON.parse(response.body)
     end
