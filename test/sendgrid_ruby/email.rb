@@ -357,6 +357,26 @@ class EmailTest < Test::Unit::TestCase
     assert_equal('{"unique_args":{"sub_1":["val_1.1","val_1.2","val_1.3"],"sub_2":["val_2.1","val_2.2"],"sub_3":["val_3.1","val_3.2","val_3.3","val_3.4"],"sub_4":["val_4.1","val_4.2","val_4.3"],"uncle":"bob"}}', email.smtpapi.json_string)
   end
 
+  def test_send_all
+    email = SendgridRuby::Email.new
+
+    localtime = Time.local(2014, 8, 29, 17, 56, 35)
+    email.set_send_all(localtime)
+
+    assert_equal("{\"send_all\":\"#{localtime.to_i}\"}", email.smtpapi.json_string)
+  end
+
+  def test_send_each_at
+    email = SendgridRuby::Email.new
+
+    localtime1 = Time.local(2014,  8, 29, 17, 56, 35)
+    localtime2 = Time.local(2013, 12, 31,  0,  0,  0)
+    localtime3 = Time.local(2015,  9,  1,  4,  5,  6)
+    email.set_send_each_at([localtime1, localtime2, localtime3])
+
+    assert_equal("{\"send_each_at\":[\"#{localtime1.to_i}\",\"#{localtime2.to_i}\",\"#{localtime3.to_i}\"]}", email.smtpapi.json_string)
+  end
+
   def test_header_accessors
     # A new message shouldn't have any RFC-822 headers set
     message = SendgridRuby::Email.new

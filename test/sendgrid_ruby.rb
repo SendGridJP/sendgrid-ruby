@@ -16,7 +16,7 @@ class SendgridRubyTest < Test::Unit::TestCase
   end
 
   def test_version
-    assert_equal("0.0.3", SendgridRuby::VERSION)
+    assert_equal("0.0.4", SendgridRuby::VERSION)
   end
 
   def test_initialize
@@ -45,11 +45,10 @@ class SendgridRubyTest < Test::Unit::TestCase
       set_text('foobar text').
       add_to(@to)
 
-    sendgrid = SendgridRuby::Sendgrid.new("user", "pass")
+    sendgrid = SendgridRuby::Sendgrid.new(@username, @password)
     sendgrid.debug_output = true
-    assert_raise RestClient::BadRequest do
-      sendgrid.send(email)
-    end
+    res = sendgrid.send(email)
+    assert_equal("{\"message\":\"success\"}", res.to_json)
   end
 
   def test_send_with_attachment_text
@@ -60,11 +59,10 @@ class SendgridRubyTest < Test::Unit::TestCase
       add_to(@to).
       add_attachment('./test/file1.txt')
 
-    sendgrid = SendgridRuby::Sendgrid.new("user", "pass")
+    sendgrid = SendgridRuby::Sendgrid.new(@username, @password)
     sendgrid.debug_output = true
-    assert_raise RestClient::BadRequest do
-      sendgrid.send(email)
-    end
+    res = sendgrid.send(email)
+    assert_equal("{\"message\":\"success\"}", res.to_json)
   end
 
   def test_send_with_attachment_binary
@@ -75,11 +73,10 @@ class SendgridRubyTest < Test::Unit::TestCase
       add_to(@to).
       add_attachment('./test/gif.gif')
 
-    sendgrid = SendgridRuby::Sendgrid.new("user", "pass")
+    sendgrid = SendgridRuby::Sendgrid.new(@username, @password)
     sendgrid.debug_output = true
-    assert_raise RestClient::BadRequest do
-      sendgrid.send(email)
-    end
+    res = sendgrid.send(email)
+    assert_equal("{\"message\":\"success\"}", res.to_json)
   end
 
   def test_send_with_attachment_missing_extension
@@ -90,11 +87,10 @@ class SendgridRubyTest < Test::Unit::TestCase
       add_to(@to).
       add_attachment('./test/gif')
 
-    sendgrid = SendgridRuby::Sendgrid.new("user", "pass")
+    sendgrid = SendgridRuby::Sendgrid.new(@username, @password)
     sendgrid.debug_output = true
-    assert_raise RestClient::BadRequest do
-      sendgrid.send(email)
-    end
+    res = sendgrid.send(email)
+    assert_equal("{\"message\":\"success\"}", res.to_json)
   end
 
   def test_send_with_ssl_option_false
@@ -104,11 +100,10 @@ class SendgridRubyTest < Test::Unit::TestCase
       set_text('foobar text').
       add_to(@to)
 
-    sendgrid = SendgridRuby::Sendgrid.new("user", "pass", {"turn_off_ssl_verification" => true})
+    sendgrid = SendgridRuby::Sendgrid.new(@username, @password, {"turn_off_ssl_verification" => true})
     sendgrid.debug_output = true
-    assert_raise RestClient::BadRequest do
-      sendgrid.send(email)
-    end
+    res = sendgrid.send(email)
+    assert_equal("{\"message\":\"success\"}", res.to_json)
   end
 
   def test_send_unicode
@@ -128,11 +123,10 @@ class SendgridRubyTest < Test::Unit::TestCase
     .add_header('X-Sent-Using', 'SendgridRuby-API')
     .add_attachment('./test/gif.gif', 'owl.gif')
 
-    sendgrid = SendgridRuby::Sendgrid.new("user", "pass")
+    sendgrid = SendgridRuby::Sendgrid.new(@username, @password)
     sendgrid.debug_output = true
-    assert_raise RestClient::BadRequest do
-      sendgrid.send(email)
-    end
+    res = sendgrid.send(email)
+    assert_equal("{\"message\":\"success\"}", res.to_json)
 
   end
 
@@ -150,7 +144,9 @@ class SendgridRubyTest < Test::Unit::TestCase
 
     sendgrid = SendgridRuby::Sendgrid.new(@username, @password)
     sendgrid.debug_output = true
-    sendgrid.send(email)
+    res = sendgrid.send(email)
+    assert_equal("{\"message\":\"success\"}", res.to_json)
+
   end
 
 end
