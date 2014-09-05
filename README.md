@@ -268,26 +268,6 @@ mail.add_to('foo@bar.com')
     .add_filter("footer", "text/html", "<p style='color:red;'>Here is an HTML footer</p>")
 ```
 
-### Scheduled send ###
-
-You can specify delay to send. There are 2 parameters for delay sending.
-
-#### send_all ####
-```Ruby
-mail   = SendgridRuby::Email.new
-localtime = Time.local(2014, 8, 29, 17, 56, 35)
-mail.set_send_all(localtime)
-```
-
-#### send_each_at ####
-```Ruby
-mail   = SendgridRuby::Email.new
-localtime1 = Time.local(2014,  8, 29, 17, 56, 35)
-localtime2 = Time.local(2013, 12, 31,  0,  0,  0)
-localtime3 = Time.local(2015,  9,  1,  4,  5,  6)
-mail.set_send_each_at([localtime1, localtime2, localtime3])
-```
-
 ### Headers ###
 
 You can add standard email message headers as necessary.
