@@ -268,7 +268,7 @@ mail.add_to('foo@bar.com')
     .add_filter("footer", "text/html", "<p style='color:red;'>Here is an HTML footer</p>")
 ```
 
-### Headers ###
+#2d55b5### Headers ###
 
 You can add standard email message headers as necessary.
 
