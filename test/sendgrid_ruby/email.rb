@@ -357,13 +357,13 @@ class EmailTest < Test::Unit::TestCase
     assert_equal('{"unique_args":{"sub_1":["val_1.1","val_1.2","val_1.3"],"sub_2":["val_2.1","val_2.2"],"sub_3":["val_3.1","val_3.2","val_3.3","val_3.4"],"sub_4":["val_4.1","val_4.2","val_4.3"],"uncle":"bob"}}', email.smtpapi.json_string)
   end
 
-  def test_send_all
+  def test_send_at
     email = SendgridRuby::Email.new
 
     localtime = Time.local(2014, 8, 29, 17, 56, 35)
-    email.set_send_all(localtime)
+    email.set_send_at(localtime)
 
-    assert_equal("{\"send_all\":\"#{localtime.to_i}\"}", email.smtpapi.json_string)
+    assert_equal("{\"send_at\":\"#{localtime.to_i}\"}", email.smtpapi.json_string)
   end
 
   def test_send_each_at
