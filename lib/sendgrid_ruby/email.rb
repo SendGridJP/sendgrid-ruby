@@ -257,8 +257,8 @@ module SendgridRuby
       @smtpapi.add_filter(filter_name, parameter_name, parameter_value)
     end
 
-    def set_send_all(send_all)
-      @smtpapi.set_send_all(send_all)
+    def set_send_at(send_at)
+      @smtpapi.set_send_at(send_at)
     end
 
     def set_send_each_at(send_each_at)
