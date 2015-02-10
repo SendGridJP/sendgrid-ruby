@@ -363,7 +363,7 @@ class EmailTest < Test::Unit::TestCase
     localtime = Time.local(2014, 8, 29, 17, 56, 35)
     email.set_send_at(localtime)
 
-    assert_equal("{\"send_at\":\"#{localtime.to_i}\"}", email.smtpapi.json_string)
+    assert_equal("{\"send_at\":#{localtime.to_i}}", email.smtpapi.json_string)
   end
 
   def test_send_each_at
@@ -374,7 +374,16 @@ class EmailTest < Test::Unit::TestCase
     localtime3 = Time.local(2015,  9,  1,  4,  5,  6)
     email.set_send_each_at([localtime1, localtime2, localtime3])
 
-    assert_equal("{\"send_each_at\":[\"#{localtime1.to_i}\",\"#{localtime2.to_i}\",\"#{localtime3.to_i}\"]}", email.smtpapi.json_string)
+    assert_equal("{\"send_each_at\":[#{localtime1.to_i},#{localtime2.to_i},#{localtime3.to_i}]}", email.smtpapi.json_string)
+  end
+
+  def test_asm_group_id
+    email = SendgridRuby::Email.new
+
+    email.set_asm_group(222)
+
+    assert_equal("{\"asm_group_id\":222}", email.smtpapi.json_string)
+
   end
 
   def test_header_accessors

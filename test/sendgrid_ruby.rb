@@ -16,7 +16,7 @@ class SendgridRubyTest < Test::Unit::TestCase
   end
 
   def test_version
-    assert_equal("0.0.5", SendgridRuby::VERSION)
+    assert_equal("0.0.6", SendgridRuby::VERSION)
   end
 
   def test_initialize

@@ -265,6 +265,10 @@ module SendgridRuby
       @smtpapi.set_send_each_at(send_each_at)
     end
 
+    def set_asm_group(group_id)
+      @smtpapi.set_asm_group(group_id)
+    end
+
     def get_headers()
       @headers
     end
